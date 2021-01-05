@@ -18,6 +18,8 @@
 //
 
 // The setup() function runs once each time the micro-controller starts
+#include <FastLED.h>
+#include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 void setup()
 {
