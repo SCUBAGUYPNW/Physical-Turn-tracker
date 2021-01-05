@@ -58,7 +58,14 @@ int undoLED = 0;
 
 void setup()
 {
-
+    Serial.begin(9600);
+    //FastLED.addLeds<WS2812B, ledPin, RGB>(leds, NUM_LEDS);
+    lcd.begin(16, 2);
+    pinMode(buttonNextTurn, INPUT);
+    pinMode(buttonNextRound, INPUT);
+    pinMode(buttonUndo, INPUT);
+    lcd.clear();
+    //FastLED.clear();
 
 }
 
