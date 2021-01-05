@@ -72,6 +72,64 @@ void setup()
 // Add the main program code into the continuous loop() function
 void loop()
 {
+    Serial.print("Button Next Turn = ");
+    Serial.print(lastButtonPress);
+    Serial.print(", ");
+    Serial.print("Button Next Round = ");
+    Serial.print(buttonValRound);
+    Serial.print(", ");
+    Serial.print("Button Undo = ");
+    Serial.println(buttonValUndo);
+
+    lcd.setCursor(0, 0);
+    lcd.print(" Turn     Round");
+    lcd.setCursor(0, 1);
+    lcd.print(" ");
+    lcd.print(displayValTurn);
+    if (displayValTurn > 9) {
+        lcd.print("       ");
+    }
+    else {
+        lcd.print("        ");
+    }
+    lcd.print(displayValRound);
+
+    //leds[9] = CHSV (96, 255, 192);
+    //FastLED.show();
+    if (buttonNextTurn == 1) {
+        //  leds[currentLED] = CHSV (96, 255, 192);
+        undoLED = currentLED;
+        currentLED = currentLED + 1;
+        lastButtonPress = 1;
+        turnUndoVal = turnCount;
+        turnCount = turnCount + 1;
+        displayValTurn = turnCount;
+        ;
+        delay(dt);
+    }
+    if (buttonValRound == 1 && displayValTurn > 1) {
+        lastButtonPress = 2;
+        turnCount = 1;
+        displayValTurn = turnCount;
+        roundUndoVal = roundCount;
+        roundCount = roundCount + 1;
+        displayValRound = roundCount;
+        delay(dt);
+    }
+
+    if (buttonValUndo == 1 && lastButtonPress == 1) {
+        displayValTurn = turnUndoVal;
+        turnCount = turnUndoVal;
+        delay(dt);
+    }
+
+    if (buttonValUndo == 1 && lastButtonPress == 2) {
+        displayValTurn = turnUndoVal + 1;
+        turnCount = turnUndoVal + 1;
+        displayValRound = roundUndoVal;
+        roundCount = roundUndoVal;
+        delay(dt);
+    }
 
 
 }
