@@ -49,6 +49,7 @@ int roundUndoVal = 0;
 int lastButtonPress = 0;
 const int ledPin = 8;
 int currentLED = 0;
+int roundLED = 0;
 int undoLED = 0;
 
 CRGB leds[NUM_LEDS];
@@ -64,14 +65,14 @@ void setup()
     pinMode(buttonNextRound, INPUT);
     pinMode(buttonUndo, INPUT);
     lcd.clear();
-    
-   
+    FastLED.clear();
+    FastLED.show();
 
 }
 
 // Add the main program code into the continuous loop() function
 void loop() {
-    
+    FastLED.clear();
     buttonValTurn = digitalRead(buttonNextTurn);
     buttonValRound = digitalRead(buttonNextRound);
     buttonValUndo = digitalRead(buttonUndo);
@@ -93,50 +94,57 @@ void loop() {
 
 
    // leds[currentLED] = CHSV (96, 255, 192);
-      FastLED.clear();
+      
     
 
 
    if (buttonValTurn == 0) {
-    leds[currentLED] = CHSV (96, 255, 192);
     undoLED = currentLED;
-    currentLED = currentLED + 1;
     lastButtonPress = 1;
     turnUndoVal = turnCount;
     turnCount = turnCount + 1;
     displayValTurn = turnCount;
+    leds[currentLED] = CHSV(96, 255, 192);
     FastLED.show();
+    currentLED = currentLED + 1;
     delay(dt);
    }
 
 
     if (buttonValRound == 0 && displayValTurn > 1) {
         lastButtonPress = 2;
-        turnCount = 1;
-        currentLED = 0;
-        leds[currentLED] = CHSV(96, 255, 192);
+        leds[0] = CHSV(96, 255, 192);
         FastLED.show();
-        displayValTurn = turnCount;
+        displayValTurn = 1;
+        currentLED = 1;
+       turnUndoVal = turnCount;
         roundUndoVal = roundCount;
         roundCount = roundCount +1;
         displayValRound = roundCount;
+        turnCount = 1;
         delay(dt);
     }
 
   if (buttonValUndo == 0 && lastButtonPress == 1) {
+     lastButtonPress = 3;
      displayValTurn = turnUndoVal;
+     currentLED = turnUndoVal;
      turnCount = turnUndoVal;
-     currentLED = currentLED - 1;
-     leds[currentLED] = CHSV(96, 255, 192);
+     undoLED = turnCount - 1;
+     leds[undoLED] = CHSV(96, 255, 192);
      FastLED.show();
      delay(dt);
      }
 
    if (buttonValUndo == 0 && lastButtonPress == 2) {
-    displayValTurn = turnUndoVal + 1;
-    turnCount = turnUndoVal + 1;
+    displayValTurn = turnUndoVal;
+    turnCount = turnUndoVal;
     displayValRound = roundUndoVal;
     roundCount = roundUndoVal;
+    currentLED = turnCount;
+    undoLED = turnCount - 1;
+    leds[undoLED] = CHSV(96, 255, 192);
+    FastLED.show();
    delay(dt);
     }
 
