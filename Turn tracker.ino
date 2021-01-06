@@ -79,22 +79,6 @@ void loop() {
     buttonValRound = digitalRead(buttonNextRound);
     buttonValUndo = digitalRead(buttonUndo);
 
-    Serial.print("Button Next Turn = ");
-    Serial.print(buttonValTurn);
-    Serial.print(", ");
-    Serial.print("Button Next Round = ");
-    Serial.print(buttonValRound);
-    Serial.print(", ");
-    Serial.print("Button Undo = ");
-    Serial.println(buttonValUndo);
-    Serial.print("last button press ");
-    Serial.println(lastButtonPress);
-    Serial.print("Round Count ");
-    Serial.println(roundCount);
-    Serial.print("turnUndoVal ");
-    Serial.println(turnUndoVal);
-    Serial.print("RoundUndoVal ");
-    Serial.println(roundUndoVal);
 
     lcd.setCursor(0, 0);
     lcd.print(" Turn     Round");
@@ -135,7 +119,6 @@ void loop() {
         roundUndoVal = roundCount;
         roundCount = roundCount +1;
         displayValRound = roundCount;
-        Serial.println("After displaValRound");
         delay(dt);
     }
 
