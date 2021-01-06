@@ -18,23 +18,21 @@
 //
 
 // The setup() function runs once each time the micro-controller starts
-//#include <FastLED.h>
+#include <FastLED.h>
 #include <LiquidCrystal.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 
-//#define NUM_LEDS 15
+#define NUM_LEDS 15
 
-
-
-
-// Define LCD pinout
-//const int  en = 2, rw = 1, rs = 0, d4 = 4, d5 = 5, d6 = 6, d7 = 7, bl = 3;
 
 // Define I2C Address - change if reqiuired
 const int i2c_addr = 0x3F;
 
+// Defind LCD pinout
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Declair Variables
 int buttonNextTurn = 5;
 int buttonNextRound = 10;
 int buttonUndo = 7;
@@ -53,20 +51,20 @@ const int ledPin = 8;
 int currentLED = 9;
 int undoLED = 0;
 
-//CRGB leds[NUM_LEDS];
+CRGB leds[NUM_LEDS];
 
 
 
 void setup()
 {
     Serial.begin(9600);
-    //FastLED.addLeds<WS2812B, ledPin, RGB>(leds, NUM_LEDS);
+    FastLED.addLeds<WS2812B, ledPin, RGB>(leds, NUM_LEDS);
     lcd.begin();
     pinMode(buttonNextTurn, INPUT);
     pinMode(buttonNextRound, INPUT);
     pinMode(buttonUndo, INPUT);
     lcd.clear();
-    //FastLED.clear();
+    FastLED.clear();
 
    
 
@@ -95,8 +93,8 @@ void loop() {
 
 
 
-    //leds[9] = CHSV (96, 255, 192);
-    //FastLED.show();
+    leds[9] = CHSV (96, 255, 192);
+    FastLED.show();
 
 
 
