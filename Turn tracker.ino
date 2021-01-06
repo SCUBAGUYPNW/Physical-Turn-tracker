@@ -64,8 +64,7 @@ void setup()
     pinMode(buttonNextRound, INPUT);
     pinMode(buttonUndo, INPUT);
     lcd.clear();
-    FastLED.clear();
-
+    
    
 
 }
@@ -94,7 +93,7 @@ void loop() {
 
 
    // leds[currentLED] = CHSV (96, 255, 192);
-    FastLED.clear();
+      FastLED.clear();
     
 
 
@@ -114,6 +113,9 @@ void loop() {
     if (buttonValRound == 0 && displayValTurn > 1) {
         lastButtonPress = 2;
         turnCount = 1;
+        currentLED = 0;
+        leds[currentLED] = CHSV(96, 255, 192);
+        FastLED.show();
         displayValTurn = turnCount;
         roundUndoVal = roundCount;
         roundCount = roundCount +1;
@@ -124,6 +126,9 @@ void loop() {
   if (buttonValUndo == 0 && lastButtonPress == 1) {
      displayValTurn = turnUndoVal;
      turnCount = turnUndoVal;
+     currentLED = currentLED - 1;
+     leds[currentLED] = CHSV(96, 255, 192);
+     FastLED.show();
      delay(dt);
      }
 
