@@ -121,8 +121,8 @@ void loop() {
   //   undoLED = currentLED;
   //  currentLED = currentLED + 1;
     lastButtonPress = 1;
-    turnCount = turnCount + 1;
     turnUndoVal = turnCount;
+    turnCount = turnCount + 1;
     displayValTurn = turnCount;
     delay(dt);
    }
@@ -139,11 +139,11 @@ void loop() {
         delay(dt);
     }
 
-  //  if (buttonValUndo == 0 && lastButtonPress == 1) {
-   //     displayValTurn = turnUndoVal;
-   //    turnCount = turnUndoVal;
-  //      delay(dt);
- //   }
+  if (buttonValUndo == 0 && lastButtonPress == 1) {
+     displayValTurn = turnUndoVal;
+     turnCount = turnUndoVal;
+     delay(dt);
+     }
 
    // if (buttonValUndo == 1 && lastButtonPress == 2) {
     //    displayValTurn = turnUndoVal + 1;
