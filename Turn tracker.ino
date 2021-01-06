@@ -18,7 +18,8 @@
 //
 
 // The setup() function runs once each time the micro-controller starts
-#include <FastLED.h>
+//#include <FastLED.h>
+#include <LiquidCrystal.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 
@@ -28,15 +29,15 @@
 
 
 // Define LCD pinout
-const int  en = 2, rw = 1, rs = 0, d4 = 4, d5 = 5, d6 = 6, d7 = 7, bl = 3;
+//const int  en = 2, rw = 1, rs = 0, d4 = 4, d5 = 5, d6 = 6, d7 = 7, bl = 3;
 
 // Define I2C Address - change if reqiuired
 const int i2c_addr = 0x3F;
 
-LiquidCrystal_I2C lcd(0x27, en, rw, rs, d4, d5, d6, d7, bl, POSITIVE);
-int buttonNextTurn = 10;
-int buttonNextRound = 11;
-int buttonUndo = 12;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+int buttonNextTurn = 5;
+int buttonNextRound = 6;
+int buttonUndo = 7;
 int buttonValTurn;
 int buttonValRound;
 int buttonValUndo;
@@ -60,7 +61,7 @@ void setup()
 {
     Serial.begin(9600);
     //FastLED.addLeds<WS2812B, ledPin, RGB>(leds, NUM_LEDS);
-    lcd.begin(16, 2);
+    lcd.begin();
     pinMode(buttonNextTurn, INPUT);
     pinMode(buttonNextRound, INPUT);
     pinMode(buttonUndo, INPUT);
@@ -73,7 +74,7 @@ void setup()
 void loop()
 {
     Serial.print("Button Next Turn = ");
-    Serial.print(lastButtonPress);
+    Serial.print(buttonValTurn);
     Serial.print(", ");
     Serial.print("Button Next Round = ");
     Serial.print(buttonValRound);
@@ -94,20 +95,26 @@ void loop()
     }
     lcd.print(displayValRound);
 
+    buttonValTurn = digitalRead(buttonNextTurn);
+    buttonValRound = digitalRead(buttonNextRound);
+    buttonValUndo = digitalRead(buttonUndo);
+
     //leds[9] = CHSV (96, 255, 192);
     //FastLED.show();
-    if (buttonNextTurn == 1) {
+
+ 
+
+    if (buttonValTurn == 0) {
         //  leds[currentLED] = CHSV (96, 255, 192);
-        undoLED = currentLED;
-        currentLED = currentLED + 1;
+     //   undoLED = currentLED;
+    //   currentLED = currentLED + 1;
         lastButtonPress = 1;
         turnUndoVal = turnCount;
         turnCount = turnCount + 1;
         displayValTurn = turnCount;
-        ;
         delay(dt);
     }
-    if (buttonValRound == 1 && displayValTurn > 1) {
+    if (buttonValRound == 0 && displayValTurn > 1) {
         lastButtonPress = 2;
         turnCount = 1;
         displayValTurn = turnCount;
@@ -117,7 +124,7 @@ void loop()
         delay(dt);
     }
 
-    if (buttonValUndo == 1 && lastButtonPress == 1) {
+    if (buttonValUndo == 0 && lastButtonPress == 1) {
         displayValTurn = turnUndoVal;
         turnCount = turnUndoVal;
         delay(dt);
