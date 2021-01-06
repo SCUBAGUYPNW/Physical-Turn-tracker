@@ -48,7 +48,7 @@ int turnUndoVal = 0;
 int roundUndoVal = 0;
 int lastButtonPress = 0;
 const int ledPin = 8;
-int currentLED = 9;
+int currentLED = 0;
 int undoLED = 0;
 
 CRGB leds[NUM_LEDS];
@@ -93,19 +93,20 @@ void loop() {
 
 
 
-    leds[9] = CHSV (96, 255, 192);
-    FastLED.show();
-
+   // leds[currentLED] = CHSV (96, 255, 192);
+    FastLED.clear();
+    
 
 
    if (buttonValTurn == 0) {
-     // leds[currentLED] = CHSV (96, 255, 192);
-  //   undoLED = currentLED;
-  //  currentLED = currentLED + 1;
+    leds[currentLED] = CHSV (96, 255, 192);
+    undoLED = currentLED;
+    currentLED = currentLED + 1;
     lastButtonPress = 1;
     turnUndoVal = turnCount;
     turnCount = turnCount + 1;
     displayValTurn = turnCount;
+    FastLED.show();
     delay(dt);
    }
 
