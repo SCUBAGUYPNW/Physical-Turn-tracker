@@ -7,9 +7,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Turn tracker", "Turn tracke
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wire-1.0", "Libraries\Wire\1.0\Wire\Wire-1.0.vcxitems", "{4840E3C7-2CF3-4F61-8C7D-8ECAC58503A8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FastLED_NeoMatrix-1.1", "Libraries\FastLED_NeoMatrix\1.1\FastLED_NeoMatrix\FastLED_NeoMatrix-1.1.vcxitems", "{4C36176A-B896-445F-98B3-7FE19022ED54}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FastLED-3.4.0", "Libraries\FastLED\3.4.0\FastLED\FastLED-3.4.0.vcxitems", "{AA6042C7-0357-4B92-AB9B-54211F1BF619}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arduino-LiquidCrystal-I2C-library-master-0.0.0", "Libraries\Arduino-LiquidCrystal-I2C-library-master\0.0.0\Arduino-LiquidCrystal-I2C-library-master\Arduino-LiquidCrystal-I2C-library-master-0.0.0.vcxitems", "{90CB7BDE-E26B-49F9-82A2-67E67A1EE368}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Libraries\Wire\1.0\Wire\Wire-1.0.vcxitems*{4840e3c7-2cf3-4f61-8c7d-8ecac58503a8}*SharedItemsImports = 9
+		Libraries\FastLED_NeoMatrix\1.1\FastLED_NeoMatrix\FastLED_NeoMatrix-1.1.vcxitems*{4c36176a-b896-445f-98b3-7fe19022ed54}*SharedItemsImports = 9
+		Libraries\Arduino-LiquidCrystal-I2C-library-master\0.0.0\Arduino-LiquidCrystal-I2C-library-master\Arduino-LiquidCrystal-I2C-library-master-0.0.0.vcxitems*{90cb7bde-e26b-49f9-82a2-67e67a1ee368}*SharedItemsImports = 9
+		Libraries\FastLED\3.4.0\FastLED\FastLED-3.4.0.vcxitems*{aa6042c7-0357-4b92-ab9b-54211f1bf619}*SharedItemsImports = 9
+		Libraries\Arduino-LiquidCrystal-I2C-library-master\0.0.0\Arduino-LiquidCrystal-I2C-library-master\Arduino-LiquidCrystal-I2C-library-master-0.0.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
 		Libraries\Wire\1.0\Wire\Wire-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
