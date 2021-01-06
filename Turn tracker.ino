@@ -145,13 +145,13 @@ void loop() {
      delay(dt);
      }
 
-   // if (buttonValUndo == 1 && lastButtonPress == 2) {
-    //    displayValTurn = turnUndoVal + 1;
-    //    turnCount = turnUndoVal + 1;
-   //     displayValRound = roundUndoVal;
-  //      roundCount = roundUndoVal;
- //       delay(dt);
-  //  }
+   if (buttonValUndo == 0 && lastButtonPress == 2) {
+    displayValTurn = turnUndoVal + 1;
+    turnCount = turnUndoVal + 1;
+    displayValRound = roundUndoVal;
+    roundCount = roundUndoVal;
+   delay(dt);
+    }
 
 
 }
