@@ -36,7 +36,7 @@ const int i2c_addr = 0x3F;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 int buttonNextTurn = 5;
-int buttonNextRound = 6;
+int buttonNextRound = 10;
 int buttonUndo = 7;
 int buttonValTurn;
 int buttonValRound;
@@ -68,11 +68,17 @@ void setup()
     lcd.clear();
     //FastLED.clear();
 
+   
+
 }
 
 // Add the main program code into the continuous loop() function
-void loop()
-{
+void loop() {
+    
+    buttonValTurn = digitalRead(buttonNextTurn);
+    buttonValRound = digitalRead(buttonNextRound);
+    buttonValUndo = digitalRead(buttonUndo);
+
     Serial.print("Button Next Turn = ");
     Serial.print(buttonValTurn);
     Serial.print(", ");
@@ -81,6 +87,14 @@ void loop()
     Serial.print(", ");
     Serial.print("Button Undo = ");
     Serial.println(buttonValUndo);
+    Serial.print("last button press ");
+    Serial.println(lastButtonPress);
+    Serial.print("Round Count ");
+    Serial.println(roundCount);
+    Serial.print("turnUndoVal ");
+    Serial.println(turnUndoVal);
+    Serial.print("RoundUndoVal ");
+    Serial.println(roundUndoVal);
 
     lcd.setCursor(0, 0);
     lcd.print(" Turn     Round");
@@ -95,48 +109,49 @@ void loop()
     }
     lcd.print(displayValRound);
 
-    buttonValTurn = digitalRead(buttonNextTurn);
-    buttonValRound = digitalRead(buttonNextRound);
-    buttonValUndo = digitalRead(buttonUndo);
+
 
     //leds[9] = CHSV (96, 255, 192);
     //FastLED.show();
 
- 
 
-    if (buttonValTurn == 0) {
-        //  leds[currentLED] = CHSV (96, 255, 192);
-     //   undoLED = currentLED;
-    //   currentLED = currentLED + 1;
-        lastButtonPress = 1;
-        turnUndoVal = turnCount;
-        turnCount = turnCount + 1;
-        displayValTurn = turnCount;
-        delay(dt);
-    }
+
+   if (buttonValTurn == 0) {
+     // leds[currentLED] = CHSV (96, 255, 192);
+  //   undoLED = currentLED;
+  //  currentLED = currentLED + 1;
+    lastButtonPress = 1;
+    turnCount = turnCount + 1;
+    turnUndoVal = turnCount;
+    displayValTurn = turnCount;
+    delay(dt);
+   }
+
+
     if (buttonValRound == 0 && displayValTurn > 1) {
         lastButtonPress = 2;
         turnCount = 1;
         displayValTurn = turnCount;
         roundUndoVal = roundCount;
-        roundCount = roundCount + 1;
+        roundCount = roundCount +1;
         displayValRound = roundCount;
+        Serial.println("After displaValRound");
         delay(dt);
     }
 
-    if (buttonValUndo == 0 && lastButtonPress == 1) {
-        displayValTurn = turnUndoVal;
-        turnCount = turnUndoVal;
-        delay(dt);
-    }
+  //  if (buttonValUndo == 0 && lastButtonPress == 1) {
+   //     displayValTurn = turnUndoVal;
+   //    turnCount = turnUndoVal;
+  //      delay(dt);
+ //   }
 
-    if (buttonValUndo == 1 && lastButtonPress == 2) {
-        displayValTurn = turnUndoVal + 1;
-        turnCount = turnUndoVal + 1;
-        displayValRound = roundUndoVal;
-        roundCount = roundUndoVal;
-        delay(dt);
-    }
+   // if (buttonValUndo == 1 && lastButtonPress == 2) {
+    //    displayValTurn = turnUndoVal + 1;
+    //    turnCount = turnUndoVal + 1;
+   //     displayValRound = roundUndoVal;
+  //      roundCount = roundUndoVal;
+ //       delay(dt);
+  //  }
 
 
 }
